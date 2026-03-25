@@ -10,9 +10,10 @@ endpoint = (UDP_IP, UDP_PORT)
 print("Trimit 3 triggeri catre Unicorn Recorder...")
 
 for code in [1, 2, 3]:
-    msg = str(code).encode("ascii")
-    sock.sendto(msg, endpoint)
+    sock.sendto(str(code).encode("ascii"), endpoint)
     print(f"Trimis trigger: {code}")
+    time.sleep(0.05)   # 50 ms activ
+    sock.sendto(b"0", endpoint)
     time.sleep(1.0)
 
 sock.close()
